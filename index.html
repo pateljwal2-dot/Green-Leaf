@@ -1,152 +1,1959 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official homepage of GreenLeaf Organics Pvt. Ltd.">
-    <meta name="author" content="Front-End Developer">
-    <title>GreenLeaf Organics Pvt. Ltd.</title>
-    
-    <!-- External CSS stylesheet link -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediTrade - Wholesale Pharmaceutical Management | Created by NETTRA PATEL</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#035485',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            medical: {
+              teal: '#0d9488',
+              navy: '#0f172a',
+              accent: '#2563eb'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Favicon using provided image -->
-    <link rel="icon" href="istockphoto-1045368942-612x612 (1).jpeg" type="image/jpeg">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 4px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: rgba(75, 85, 99, 0.6);
+    }
+    .toast-animate {
+      animation: slideIn 0.3s ease-out forwards;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-area { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    }
+  </style>
 </head>
-<body>
+<body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased flex flex-col transition-colors duration-200">
 
-    <!-- Header Section -->
-    <header>
-        <img src="istockphoto-1045368942-612x612 (1).jpeg" alt="GreenLeaf Logo" class="logo">
-        <h1>GreenLeaf Organics Pvt. Ltd.</h1>
-        <p><em>Nourishing Lives with Pure Organic Products</em></p>
+  <div class="flex h-screen overflow-hidden">
+    
+    <!-- Sidebar / Navigation Drawer -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-slate-900 text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col border-r border-slate-800">
+      
+      <!-- Logo Header -->
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-teal-400 flex items-center justify-center shadow-lg shadow-blue-500/30">
+            <i class="fa-solid me-0 fa-pills text-xl text-white"></i>
+          </div>
+          <div>
+            <h1 class="font-bold text-lg leading-tight tracking-wide text-white">MediTrade</h1>
+            <p class="text-xs text-blue-400 font-medium">Wholesale Pharma ERP</p>
+          </div>
+        </div>
+        <button id="closeSidebarMobile" class="md:hidden text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
 
-        <!-- Navigation Menu -->
-        <nav>
-            <a href="#about">About Us</a> |
-            <a href="#featured">Featured</a> |
-            <a href="#products">Products</a> |
-            <a href="#contact">Contact Us</a>
-        </nav>
-    </header>
+      <!-- Navigation Links -->
+      <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+        <a href="#" data-view="dashboard" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20">
+          <i class="fa-solid fa-chart-pie w-5 text-center"></i> Dashboard
+        </a>
+        <a href="#" data-view="companies" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-building-user w-5 text-center"></i> Companies
+        </a>
+        <a href="#" data-view="products" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-box-archive w-5 text-center"></i> Products
+        </a>
+        <a href="#" data-view="sales" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-file-invoice-dollar w-5 text-center"></i> Sales
+        </a>
+        <a href="#" data-view="purchases" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-cart-flatbed w-5 text-center"></i> Purchases
+        </a>
+        <a href="#" data-view="inventory" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-warehouse w-5 text-center"></i> Inventory
+        </a>
+        <a href="#" data-view="reports" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+          <i class="fa-solid fa-chart-line w-5 text-center"></i> Reports
+        </a>
+        
+        <div class="pt-4 mt-4 border-t border-slate-800">
+          <div class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">System</div>
+          <a href="#" id="resetDemoBtn" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm text-amber-400 hover:bg-amber-500/10 transition-all">
+            <i class="fa-solid fa-rotate w-5 text-center"></i> Reset Demo Data
+          </a>
+        </div>
+      </nav>
+
+      <!-- Sidebar Footer / Creator Info -->
+      <div class="p-4 border-t border-slate-800 bg-slate-950/60">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-semibold border border-slate-700">
+            JP
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-xs text-slate-400 leading-none mb-1">Created By</p>
+            <p class="text-sm font-bold text-white truncate">NETTRA PATEL</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay for Mobile Sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/60 z-30 hidden md:hidden backdrop-blur-sm"></div>
 
     <!-- Main Content Area -->
-    <main>
+    <div class="flex-1 flex flex-col md:pl-64 overflow-hidden">
+      
+      <!-- Header -->
+      <header class="h-16 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700/80 px-4 md:px-6 flex items-center justify-between z-20 transition-colors">
+        <div class="flex items-center gap-3">
+          <button id="openSidebarMobile" class="md:hidden text-slate-600 dark:text-slate-300 hover:text-slate-900 p-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div>
+            <h2 id="pageTitle" class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Dashboard Overview</h2>
+            <p id="pageSubTitle" class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Wholesale agency metrics & real-time monitoring</p>
+          </div>
+        </div>
 
-        <!-- Featured Section -->
-        <section id="featured">
-            <h2>Welcome to GreenLeaf Organics</h2>
-            <img src="istockphoto-1045368942-612x612 (1).jpeg" alt="Organic Banner" class="banner-img">
-            <p>We deliver fresh, farm-grown, and 100% organic food directly from local farmers to your doorstep.</p>
-        </section>
+        <!-- Right Header Actions -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Quick Search Bar -->
+          <div class="relative hidden lg:block w-64">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search product or code..." class="w-full bg-slate-100 dark:bg-slate-900 text-xs text-slate-800 dark:text-slate-200 pl-8 pr-3 py-2 rounded-xl border border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none transition-all">
+          </div>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Our Company</h2>
-            <p><strong>GreenLeaf Organics Pvt. Ltd.</strong> is a newly established enterprise focused on healthy living. We bring chemical-free, farm-fresh products directly to households.</p>
-            
-            <h3>Why Choose Us?</h3>
-            <ul>
-                <li>100% Certified Organic Food</li>
-                <li>Directly sourced from trusted local farmers</li>
-                <li>Zero artificial preservatives or harmful pesticides</li>
-                <li>Eco-friendly packaging material</li>
-            </ul>
-        </section>
+          <!-- Role Selector -->
+          <div class="flex items-center bg-slate-100 dark:bg-slate-900 rounded-xl p-1 text-xs font-medium border border-slate-200 dark:border-slate-700">
+            <span class="text-slate-500 dark:text-slate-400 px-2 hidden sm:inline">Role:</span>
+            <select id="userRoleSelect" class="bg-transparent text-slate-800 dark:text-slate-200 outline-none font-semibold cursor-pointer">
+              <option value="Admin" class="dark:bg-slate-800">Admin (Full)</option>
+              <option value="MR" class="dark:bg-slate-800">Medical Rep</option>
+              <option value="Staff" class="dark:bg-slate-800">Agency Staff</option>
+            </select>
+          </div>
 
-        <!-- Products Section -->
-        <section id="products">
-            <h2>Our Products & Pricing</h2>
-            <p>Check out our popular organic items:</p>
+          <!-- Theme Toggle Button -->
+          <button id="themeToggleBtn" title="Toggle Light/Dark Theme" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors">
+            <i class="fa-solid fa-moon dark:hidden"></i>
+            <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+          </button>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Item Name</th>
-                        <th>Quality Grade</th>
-                        <th>Price</th>
-                    </tr>
+          <!-- Notifications Dropdown Trigger -->
+          <div class="relative">
+            <button id="notifBtn" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 relative transition-colors">
+              <i class="fa-solid fa-bell"></i>
+              <span id="notifBadge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden">0</span>
+            </button>
+
+            <!-- Notifications Dropdown Panel -->
+            <div id="notifPanel" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+              <div class="p-3 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white">Agency Notifications</h3>
+                <span id="notifCountText" class="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 px-2 py-0.5 rounded-full font-medium">0 Alerts</span>
+              </div>
+              <div id="notifList" class="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-700/50">
+                <!-- Dynamic notifications -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Main Dynamic Content Container -->
+      <main id="mainContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+        
+        <!-- DYNAMIC VIEWS RENDERED HERE VIA JAVASCRIPT -->
+
+      </main>
+
+      <!-- Footer Footer -->
+      <footer class="py-3 px-6 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700/80 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <p><strong>MediTrade ERP</strong> — Wholesale Pharmaceutical Agency Management System</p>
+        <p class="font-medium text-slate-700 dark:text-slate-300">Designed & Developed by <span class="text-blue-600 dark:text-blue-400 font-bold">NETTRA PATEL</span></p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- MODAL CONTAINER (Dynamic Modal Popups) -->
+  <div id="modalBackdrop" class="fixed inset-0 bg-slate-900/60 z-50 hidden backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div id="modalBox" class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all my-8">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+        <h3 id="modalTitle" class="text-lg font-bold text-slate-900 dark:text-white">Modal Form</h3>
+        <button id="closeModalBtn" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <!-- Modal Body -->
+      <div id="modalBody" class="p-6 max-h-[75vh] overflow-y-auto">
+        <!-- Dynamic Form Fields -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script>
+    /* ==========================================================================
+       MEDITRADE - WHOLESALE MEDICAL AGENCY MANAGEMENT SYSTEM
+       DEVELOPED BY: NETTRA PATEL
+       ========================================================================== */
+
+    // STATE MANAGEMENT
+    const STORAGE_KEY = 'MEDITRADE_AGENCY_DATA_V1';
+    
+    // Initial Sample Data (Medical Agency)
+    const defaultData = {
+      companies: [
+        { id: 'COMP-001', name: 'Apex Remedies Ltd.', code: 'APEX', category: 'Allopathy', phone: '+91 98765 43210', email: 'orders@apexremedies.com', address: 'Plot 42, GIDC Pharma Hub, Vadodara, Gujarat', desc: 'Leading manufacturer of cardiac and anti-diabetic formulations.', logoBg: 'bg-blue-600' },
+        { id: 'COMP-002', name: 'BioMed Therapeutics', code: 'BIOMED', category: 'Antibiotics & Injectables', phone: '+91 98123 45678', email: 'supply@biomedpharma.in', address: 'Industrial Area Phase 2, Baddi, HP', desc: 'Specializing in critical care, cephalosporins, and IV infusions.', logoBg: 'bg-teal-600' },
+        { id: 'COMP-003', name: 'Nova Healthcare Corp', code: 'NOVA', category: 'General Medicine', phone: '+91 99000 11223', email: 'info@novahealth.com', address: 'Sector 62, Pharma Park, Noida, UP', desc: 'Trusted OTC, painkillers, and gastrointestinal products producer.', logoBg: 'bg-indigo-600' },
+        { id: 'COMP-004', name: 'Zenith LifeSciences', code: 'ZENITH', category: 'Pediatrics & Syrup', phone: '+91 97788 99000', email: 'agency@zenithlife.co.in', address: 'MIDC Tarapur, Thane, Maharashtra', desc: 'Pediatric drops, cough syrups, and nutritional supplements.', logoBg: 'bg-emerald-600' }
+      ],
+      products: [
+        { id: 'PROD-101', companyId: 'COMP-001', name: 'Apilip 20mg Tablet', code: 'APL-20', generic: 'Atorvastatin 20mg', category: 'Cardiovascular', pack: '10 x 15 Tablets', mrp: 180, purchasePrice: 110, sellingPrice: 140, stock: 450, minStock: 100, batchNo: 'B24-902', expiryDate: '2027-08-15' },
+        { id: 'PROD-102', companyId: 'COMP-001', name: 'GlucoApex M 500', code: 'GAP-500', generic: 'Metformin 500mg + Teneligliptin 20mg', category: 'Anti-Diabetic', pack: '10 x 10 Tablets', mrp: 145, purchasePrice: 85, sellingPrice: 112, stock: 280, minStock: 50, batchNo: 'B24-411', expiryDate: '2026-11-30' },
+        { id: 'PROD-103', companyId: 'COMP-002', name: 'BioCef 500 Injection', code: 'BCF-500', generic: 'Ceftriaxone 500mg', category: 'Injectables', pack: 'Vial with WFI', mrp: 65, purchasePrice: 38, sellingPrice: 48, stock: 45, minStock: 80, batchNo: 'INJ-882', expiryDate: '2026-09-20' },
+        { id: 'PROD-104', companyId: 'COMP-002', name: 'Azibio 500mg', code: 'AZI-500', generic: 'Azithromycin 500mg', category: 'Antibiotic', pack: '1 x 3 Tablets', mrp: 120, purchasePrice: 70, sellingPrice: 92, stock: 120, minStock: 40, batchNo: 'AZ-104', expiryDate: '2027-02-28' },
+        { id: 'PROD-105', companyId: 'COMP-003', name: 'Paranova 650', code: 'PRN-650', generic: 'Paracetamol 650mg', category: 'Analgesic / Anti-pyretic', pack: '10 x 15 Tablets', mrp: 35, purchasePrice: 18, sellingPrice: 26, stock: 1200, minStock: 300, batchNo: 'PN-990', expiryDate: '2027-12-31' },
+        { id: 'PROD-106', companyId: 'COMP-003', name: 'NovaPant D Cap', code: 'NVP-D', generic: 'Pantoprazole 40mg + Domperidone 30mg', category: 'Gastroenterology', pack: '10 x 10 Capsules', mrp: 160, purchasePrice: 90, sellingPrice: 122, stock: 18, minStock: 50, batchNo: 'NPD-320', expiryDate: '2026-10-15' },
+        { id: 'PROD-107', companyId: 'COMP-004', name: 'ZenCuf D Syrup', code: 'ZNC-SYP', generic: 'Dextromethorphan + Chlorpheniramine', category: 'Cough Syrup', pack: '100 ml Bottle', mrp: 95, purchasePrice: 52, sellingPrice: 72, stock: 310, minStock: 60, batchNo: 'ZC-401', expiryDate: '2026-09-10' },
+        { id: 'PROD-108', companyId: 'COMP-004', name: 'MontiZen LC', code: 'MZN-LC', generic: 'Montelukast 10mg + Levocetirizine 5mg', category: 'Anti-Allergic', pack: '10 x 10 Tablets', mrp: 175, purchasePrice: 105, sellingPrice: 138, stock: 0, minStock: 50, batchNo: 'MZC-02', expiryDate: '2026-05-10' }
+      ],
+      sales: [
+        { id: 'INV-S-1001', date: '2026-08-20', companyId: 'COMP-001', productId: 'PROD-101', customerName: 'City Health Chemist', qty: 50, price: 140, total: 7000 },
+        { id: 'INV-S-1002', date: '2026-08-21', companyId: 'COMP-003', productId: 'PROD-105', customerName: 'Care Pharmacy', qty: 200, price: 26, total: 5200 },
+        { id: 'INV-S-1003', date: '2026-08-22', companyId: 'COMP-002', productId: 'PROD-104', customerName: 'LifeLine Hospital Store', qty: 30, price: 92, total: 2760 },
+        { id: 'INV-S-1004', date: '2026-08-22', companyId: 'COMP-004', productId: 'PROD-107', customerName: 'Apollo Medical Hall', qty: 40, price: 72, total: 2880 }
+      ],
+      purchases: [
+        { id: 'INV-P-5001', date: '2026-08-10', companyId: 'COMP-001', productId: 'PROD-101', supplierName: 'Apex Depot Vadodara', qty: 500, price: 110, total: 55000 },
+        { id: 'INV-P-5002', date: '2026-08-12', companyId: 'COMP-003', productId: 'PROD-105', supplierName: 'Nova Super Stockist', qty: 1400, price: 18, total: 25200 },
+        { id: 'INV-P-5003', date: '2026-08-15', companyId: 'COMP-002', productId: 'PROD-103', supplierName: 'BioMed C&F Chandigarh', qty: 100, price: 38, total: 3800 }
+      ]
+    };
+
+    let appData = loadAppData();
+    let currentView = 'dashboard';
+    let selectedCompanyId = null;
+    let userRole = 'Admin';
+
+    // Chart instances store
+    let activeCharts = {};
+
+    // LOCAL STORAGE LOAD/SAVE
+    function loadAppData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Failed to parse stored data", e);
+        }
+      }
+      return JSON.parse(JSON.stringify(defaultData));
+    }
+
+    function saveAppData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    }
+
+    function resetDemoData() {
+      if (confirm("Are you sure you want to reset all agency data to factory demo values?")) {
+        appData = JSON.parse(JSON.stringify(defaultData));
+        saveAppData();
+        showToast("Demo data successfully restored!", "success");
+        renderCurrentView();
+        updateNotifications();
+      }
+    }
+
+    // CALCULATIONS ENGINE
+    function getCalculatedStats() {
+      const totalCompanies = appData.companies.length;
+      const totalProducts = appData.products.length;
+      const totalSales = appData.sales.reduce((sum, s) => sum + (s.total || 0), 0);
+      const totalPurchases = appData.purchases.reduce((sum, p) => sum + (p.total || 0), 0);
+      
+      const stockValue = appData.products.reduce((sum, p) => sum + ((p.stock || 0) * (p.purchasePrice || 0)), 0);
+      const lowStockCount = appData.products.filter(p => p.stock <= p.minStock).length;
+
+      return { totalCompanies, totalProducts, totalSales, totalPurchases, stockValue, lowStockCount };
+    }
+
+    function getCompanyStats(compId) {
+      const companyProducts = appData.products.filter(p => p.companyId === compId);
+      const compSales = appData.sales.filter(s => s.companyId === compId);
+      const compPurchases = appData.purchases.filter(p => p.companyId === compId);
+
+      const productCount = companyProducts.length;
+      const totalSales = compSales.reduce((sum, s) => sum + (s.total || 0), 0);
+      const totalPurchases = compPurchases.reduce((sum, p) => sum + (p.total || 0), 0);
+      const inventoryVal = companyProducts.reduce((sum, p) => sum + ((p.stock || 0) * (p.purchasePrice || 0)), 0);
+
+      return { productCount, totalSales, totalPurchases, inventoryVal };
+    }
+
+    // FORMATTERS
+    function formatINR(val) {
+      return '₹' + Number(val || 0).toLocaleString('en-IN');
+    }
+
+    function getExpiryStatus(dateStr) {
+      if (!dateStr) return { label: 'Valid', class: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' };
+      const today = new Date();
+      const exp = new Date(dateStr);
+      const diffDays = Math.ceil((exp - today) / (1000 * 60 * 60 * 24));
+
+      if (diffDays <= 0) {
+        return { label: 'Expired', class: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300' };
+      } else if (diffDays <= 90) {
+        return { label: 'Expiring Soon', class: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' };
+      }
+      return { label: 'Valid', class: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' };
+    }
+
+    // NAVIGATION CONTROLLER
+    document.addEventListener('DOMContentLoaded', () => {
+      initApp();
+    });
+
+    function initApp() {
+      setupEventListeners();
+      checkTheme();
+      updateNotifications();
+      renderCurrentView();
+    }
+
+    function setupEventListeners() {
+      // Sidebar Nav Links
+      document.querySelectorAll('.nav-item').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = link.getAttribute('data-view');
+          navigateTo(target);
+          closeMobileSidebar();
+        });
+      });
+
+      // Mobile Sidebar toggle
+      document.getElementById('openSidebarMobile').addEventListener('click', openMobileSidebar);
+      document.getElementById('closeSidebarMobile').addEventListener('click', closeMobileSidebar);
+      document.getElementById('sidebarOverlay').addEventListener('click', closeMobileSidebar);
+
+      // Theme Toggle
+      document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+
+      // User Role Selector
+      document.getElementById('userRoleSelect').addEventListener('change', (e) => {
+        userRole = e.target.value;
+        showToast(`Switched to ${userRole} mode`, 'info');
+        renderCurrentView();
+      });
+
+      // Notifications Toggle
+      document.getElementById('notifBtn').addEventListener('click', () => {
+        const panel = document.getElementById('notifPanel');
+        panel.classList.toggle('hidden');
+      });
+
+      // Close Notif when clicking outside
+      document.addEventListener('click', (e) => {
+        const btn = document.getElementById('notifBtn');
+        const panel = document.getElementById('notifPanel');
+        if (!btn.contains(e.target) && !panel.contains(e.target)) {
+          panel.classList.add('hidden');
+        }
+      });
+
+      // Reset Demo Data
+      document.getElementById('resetDemoBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        resetDemoData();
+      });
+
+      // Global Quick Search
+      document.getElementById('globalSearchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const q = e.target.value.trim();
+          if (q) {
+            navigateTo('products', { search: q });
+          }
+        }
+      });
+
+      // Modal Close
+      document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+      document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('modalBackdrop')) closeModal();
+      });
+    }
+
+    function navigateTo(view, params = {}) {
+      currentView = view;
+      if (params.companyId) selectedCompanyId = params.companyId;
+
+      // Highlight active nav item
+      document.querySelectorAll('.nav-item').forEach(el => {
+        const target = el.getAttribute('data-view');
+        if (target === view) {
+          el.className = "nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20";
+        } else {
+          el.className = "nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-all";
+        }
+      });
+
+      renderCurrentView(params);
+    }
+
+    function renderCurrentView(params = {}) {
+      const main = document.getElementById('mainContainer');
+      const pageTitle = document.getElementById('pageTitle');
+      const pageSubTitle = document.getElementById('pageSubTitle');
+
+      // Clear existing chart instances before rendering new views
+      destroyCharts();
+
+      switch (currentView) {
+        case 'dashboard':
+          pageTitle.innerText = "Dashboard Overview";
+          pageSubTitle.innerText = "Wholesale agency metrics & real-time monitoring";
+          main.innerHTML = buildDashboardHTML();
+          initDashboardCharts();
+          break;
+
+        case 'companies':
+          pageTitle.innerText = "Pharmaceutical Companies";
+          pageSubTitle.innerText = "Browse and manage authorized drug manufacturers & C&Fs";
+          main.innerHTML = buildCompaniesHTML();
+          attachCompaniesEvents();
+          break;
+
+        case 'company-detail':
+          const comp = appData.companies.find(c => c.id === selectedCompanyId);
+          pageTitle.innerText = comp ? comp.name : "Company Profile";
+          pageSubTitle.innerText = `Code: ${comp ? comp.code : ''} | Dedicated Company ERP View`;
+          main.innerHTML = buildCompanyDetailHTML(comp, params.subTab || 'overview');
+          attachCompanyDetailEvents(comp, params.subTab || 'overview');
+          break;
+
+        case 'products':
+          pageTitle.innerText = "Product Inventory Catalog";
+          pageSubTitle.innerText = "Search & inspect all formulations across companies";
+          main.innerHTML = buildProductsHTML(params.search);
+          attachProductsEvents();
+          break;
+
+        case 'sales':
+          pageTitle.innerText = "Sales Register & Billing";
+          pageSubTitle.innerText = "Track distributor sales invoices and daily revenue";
+          main.innerHTML = buildSalesHTML();
+          attachSalesEvents();
+          break;
+
+        case 'purchases':
+          pageTitle.innerText = "Purchases Register";
+          pageSubTitle.innerText = "Company stock acquisitions and inbound invoices";
+          main.innerHTML = buildPurchasesHTML();
+          attachPurchasesEvents();
+          break;
+
+        case 'inventory':
+          pageTitle.innerText = "Stock & Inventory Control";
+          pageSubTitle.innerText = "Batch expiry tracking, minimum stock alerts & valuations";
+          main.innerHTML = buildInventoryHTML();
+          attachInventoryEvents();
+          break;
+
+        case 'reports':
+          pageTitle.innerText = "Agency Analytics & Reports";
+          pageSubTitle.innerText = "Financial statements, stock valuation & performance charts";
+          main.innerHTML = buildReportsHTML();
+          initReportsCharts();
+          break;
+
+        default:
+          main.innerHTML = `<div class="p-6 text-center text-slate-500">View not found</div>`;
+      }
+    }
+
+    // 1. DASHBOARD VIEW
+    function buildDashboardHTML() {
+      const stats = getCalculatedStats();
+
+      return `
+        <!-- Top Stats Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Companies</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                <i class="fa-solid fa-building text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-slate-900 dark:text-white">${stats.totalCompanies}</div>
+              <p class="text-[11px] text-emerald-600 font-medium mt-1"><i class="fa-solid fa-check"></i> Active Partners</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Products</span>
+              <div class="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+                <i class="fa-solid fa-pills text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-slate-900 dark:text-white">${stats.totalProducts}</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Formulations Listed</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total Sales</span>
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <i class="fa-solid fa-arrow-trend-up text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-xl font-bold text-slate-900 dark:text-white">${formatINR(stats.totalSales)}</div>
+              <p class="text-[11px] text-emerald-600 font-medium mt-1"><i class="fa-solid fa-caret-up"></i> B2B Revenue</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total Purchases</span>
+              <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <i class="fa-solid fa-cart-shopping text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-xl font-bold text-slate-900 dark:text-white">${formatINR(stats.totalPurchases)}</div>
+              <p class="text-[11px] text-indigo-600 font-medium mt-1">Acquisitions</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Stock Value</span>
+              <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+                <i class="fa-solid fa-vault text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-xl font-bold text-slate-900 dark:text-white">${formatINR(stats.stockValue)}</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">At Cost Price</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Low Stock Alert</span>
+              <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                <i class="fa-solid fa-triangle-exclamation text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold ${stats.lowStockCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-900 dark:text-white'}">${stats.lowStockCount}</div>
+              <p class="text-[11px] ${stats.lowStockCount > 0 ? 'text-amber-600 font-medium' : 'text-slate-400'} mt-1">Items Need Reorder</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">Sales vs Purchases Trend</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Recent commercial activity overview</p>
+              </div>
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Live Updates</span>
+            </div>
+            <div class="h-64">
+              <canvas id="dashboardTrendChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">Company Stock Share</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Inventory value split</p>
+              </div>
+            </div>
+            <div class="h-64 flex items-center justify-center">
+              <canvas id="companyShareChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions Table -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Recent Sales Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+            <div class="p-4 border-b border-slate-100 dark:border-slate-700/80 flex justify-between items-center">
+              <h3 class="font-bold text-slate-900 dark:text-white text-sm"><i class="fa-solid fa-receipt text-blue-600 mr-2"></i> Recent Sales Billing</h3>
+              <button onclick="navigateTo('sales')" class="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">View All Sales &rarr;</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-100 dark:border-slate-700/80">
+                  <tr>
+                    <th class="py-2.5 px-4">Invoice</th>
+                    <th class="py-2.5 px-4">Customer</th>
+                    <th class="py-2.5 px-4">Amount</th>
+                  </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Vegetables</td>
-                        <td>Organic Tomatoes</td>
-                        <td>Grade A</td>
-                        <td>₹50 / kg</td>
-                    </tr>
-                    <tr>
-                        <td>Fruits</td>
-                        <td>Alphonso Mangoes</td>
-                        <td>Premium</td>
-                        <td>₹180 / kg</td>
-                    </tr>
-                    <tr>
-                        <td>Grains</td>
-                        <td>Brown Basmati Rice</td>
-                        <td>Grade A</td>
-                        <td>₹120 / kg</td>
-                    </tr>
-                    <tr>
-                        <td>Dairy</td>
-                        <td>Pure Cow Ghee</td>
-                        <td>Standard</td>
-                        <td>₹650 / kg</td>
-                    </tr>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                  ${appData.sales.slice(-4).reverse().map(s => {
+                    return `
+                      <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                        <td class="py-2.5 px-4 font-mono font-semibold text-slate-800 dark:text-slate-200">${s.id}</td>
+                        <td class="py-2.5 px-4 text-slate-600 dark:text-slate-300">${s.customerName}</td>
+                        <td class="py-2.5 px-4 font-bold text-emerald-600 dark:text-emerald-400">${formatINR(s.total)}</td>
+                      </tr>
+                    `;
+                  }).join('') || '<tr><td colspan="3" class="p-4 text-center text-slate-400">No sales recorded yet</td></tr>'}
                 </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Low Stock Warning Quick List -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+            <div class="p-4 border-b border-slate-100 dark:border-slate-700/80 flex justify-between items-center">
+              <h3 class="font-bold text-slate-900 dark:text-white text-sm"><i class="fa-solid fa-triangle-exclamation text-amber-500 mr-2"></i> Low Stock Warning</h3>
+              <button onclick="navigateTo('inventory')" class="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">Manage Inventory &rarr;</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-100 dark:border-slate-700/80">
+                  <tr>
+                    <th class="py-2.5 px-4">Product</th>
+                    <th class="py-2.5 px-4">Available</th>
+                    <th class="py-2.5 px-4">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                  ${appData.products.filter(p => p.stock <= p.minStock).slice(0, 4).map(p => `
+                    <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                      <td class="py-2.5 px-4 font-semibold text-slate-800 dark:text-slate-200">${p.name}</td>
+                      <td class="py-2.5 px-4 font-bold ${p.stock === 0 ? 'text-red-600' : 'text-amber-600'}">${p.stock} units</td>
+                      <td class="py-2.5 px-4">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${p.stock === 0 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}">
+                          ${p.stock === 0 ? 'OUT OF STOCK' : 'LOW STOCK'}
+                        </span>
+                      </td>
+                    </tr>
+                  `).join('') || '<tr><td colspan="3" class="p-4 text-center text-emerald-600 font-medium">All items adequately stocked</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function initDashboardCharts() {
+      // 1. Trend Chart
+      const ctx1 = document.getElementById('dashboardTrendChart');
+      if (ctx1) {
+        activeCharts.dashboardTrend = new Chart(ctx1, {
+          type: 'line',
+          data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Current Week'],
+            datasets: [
+              {
+                label: 'Sales (₹)',
+                data: [12000, 18500, 14200, appData.sales.reduce((s, x) => s + x.total, 0)],
+                borderColor: '#0284c7',
+                backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                tension: 0.3,
+                fill: true
+              },
+              {
+                label: 'Purchases (₹)',
+                data: [45000, 12000, 25000, appData.purchases.reduce((s, x) => s + x.total, 0)],
+                borderColor: '#6366f1',
+                backgroundColor: 'rgba(99, 102, 241, 0.05)',
+                tension: 0.3,
+                fill: true
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top' } }
+          }
+        });
+      }
+
+      // 2. Company Share Chart
+      const ctx2 = document.getElementById('companyShareChart');
+      if (ctx2) {
+        const companyLabels = appData.companies.map(c => c.name);
+        const companyValues = appData.companies.map(c => {
+          return appData.products.filter(p => p.companyId === c.id).reduce((sum, p) => sum + (p.stock * p.purchasePrice), 0);
+        });
+
+        activeCharts.companyShare = new Chart(ctx2, {
+          type: 'doughnut',
+          data: {
+            labels: companyLabels,
+            datasets: [{
+              data: companyValues,
+              backgroundColor: ['#0284c7', '#0d9488', '#6366f1', '#10b981', '#f59e0b', '#ec4899']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
+          }
+        });
+      }
+    }
+
+    // 2. PHARMACEUTICAL COMPANIES VIEW
+    function buildCompaniesHTML() {
+      return `
+        <!-- Top Toolbar -->
+        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div class="relative w-full sm:w-72">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+              <input type="text" id="companySearchInput" placeholder="Search company by name or code..." class="w-full bg-white dark:bg-slate-800 text-sm pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 outline-none focus:border-blue-500 transition-all">
+            </div>
+
+            <select id="companySortFilter" class="bg-white dark:bg-slate-800 text-sm px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 outline-none">
+              <option value="all">All Companies</option>
+              <option value="most-products">Most Products</option>
+              <option value="highest-sales">Highest Sales</option>
+              <option value="highest-purchases">Highest Purchases</option>
+            </select>
+          </div>
+
+          ${userRole === 'Admin' ? `
+            <button id="addCompanyModalBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-plus"></i> Add Pharma Company
+            </button>
+          ` : ''}
+
+        </div>
+
+        <!-- Companies Grid Container -->
+        <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
+          <!-- Dynamic Cards -->
+        </div>
+      `;
+    }
+
+    function renderCompaniesGrid(filterQuery = '', sortBy = 'all') {
+      const grid = document.getElementById('companiesGrid');
+      if (!grid) return;
+
+      let list = [...appData.companies];
+
+      // Filter
+      if (filterQuery) {
+        const q = filterQuery.toLowerCase();
+        list = list.filter(c => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+      }
+
+      // Sort
+      list.sort((a, b) => {
+        const statsA = getCompanyStats(a.id);
+        const statsB = getCompanyStats(b.id);
+        if (sortBy === 'most-products') return statsB.productCount - statsA.productCount;
+        if (sortBy === 'highest-sales') return statsB.totalSales - statsA.totalSales;
+        if (sortBy === 'highest-purchases') return statsB.totalPurchases - statsA.totalPurchases;
+        return 0;
+      });
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <i class="fa-solid fa-building-circle-exclamation text-4xl text-slate-400 mb-3"></i>
+            <h4 class="font-bold text-slate-700 dark:text-slate-300">No Pharmaceutical Companies Found</h4>
+            <p class="text-xs text-slate-400 mt-1">Try adjusting search filters or add a new manufacturer.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(comp => {
+        const cStats = getCompanyStats(comp.id);
+        return `
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+            
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="w-12 h-12 rounded-xl ${comp.logoBg || 'bg-blue-600'} text-white font-bold text-lg flex items-center justify-center shadow-md">
+                  ${comp.code.substring(0, 3)}
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 uppercase tracking-wider">
+                  ${comp.category}
+                </span>
+              </div>
+
+              <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${comp.name}</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">${comp.desc || 'No description available'}</p>
+
+              <!-- Company Key Stats Box -->
+              <div class="grid grid-cols-2 gap-2 mt-4 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl text-xs border border-slate-100 dark:border-slate-700/50">
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-semibold">Formulations</span>
+                  <span class="font-bold text-slate-800 dark:text-slate-200">${cStats.productCount} Items</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-semibold">Stock Value</span>
+                  <span class="font-bold text-slate-800 dark:text-slate-200">${formatINR(cStats.inventoryVal)}</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-semibold">Total Sales</span>
+                  <span class="font-bold text-emerald-600 dark:text-emerald-400">${formatINR(cStats.totalSales)}</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-semibold">Purchases</span>
+                  <span class="font-bold text-indigo-600 dark:text-indigo-400">${formatINR(cStats.totalPurchases)}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Action Footer -->
+            <div class="p-3 bg-slate-50/80 dark:bg-slate-900/40 border-t border-slate-100 dark:border-slate-700/80 flex items-center gap-2">
+              <button onclick="navigateTo('company-detail', { companyId: '${comp.id}' })" class="flex-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white font-semibold text-xs py-2 rounded-xl text-center transition-all">
+                Open ERP Dashboard &rarr;
+              </button>
+              ${userRole === 'Admin' ? `
+                <button onclick="openEditCompanyModal('${comp.id}')" title="Edit Company" class="p-2 text-slate-400 hover:text-blue-600 rounded-lg">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              ` : ''}
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function attachCompaniesEvents() {
+      renderCompaniesGrid();
+
+      const searchInput = document.getElementById('companySearchInput');
+      const sortSelect = document.getElementById('companySortFilter');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          renderCompaniesGrid(searchInput.value, sortSelect.value);
+        });
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          renderCompaniesGrid(searchInput.value, sortSelect.value);
+        });
+      }
+
+      const addBtn = document.getElementById('addCompanyModalBtn');
+      if (addBtn) {
+        addBtn.addEventListener('click', openAddCompanyModal);
+      }
+    }
+
+    // 3. DEDICATED COMPANY DETAIL ERP DASHBOARD
+    function buildCompanyDetailHTML(comp, subTab = 'overview') {
+      if (!comp) {
+        return `<div class="p-6 text-center text-slate-500">Company Not Found</div>`;
+      }
+
+      const stats = getCompanyStats(comp.id);
+
+      return `
+        <!-- Top Back Bar & Info Header -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/80 shadow-sm space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <button onclick="navigateTo('companies')" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-slate-800 dark:hover:text-white">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <div class="w-14 h-14 rounded-2xl ${comp.logoBg || 'bg-blue-600'} text-white font-extrabold text-xl flex items-center justify-center shadow-lg">
+                ${comp.code.substring(0, 3)}
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-xl font-bold text-slate-900 dark:text-white">${comp.name}</h2>
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">${comp.code}</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${comp.address} | Phone: ${comp.phone}</p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2">
+              ${userRole === 'Admin' ? `
+                <button onclick="openAddProductModal('${comp.id}')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs px-3.5 py-2 rounded-xl shadow-sm flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus"></i> Add Formulation
+                </button>
+                <button onclick="openAddSaleModal('${comp.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs px-3.5 py-2 rounded-xl shadow-sm flex items-center gap-1.5">
+                  <i class="fa-solid fa-cart-plus"></i> New Sale
+                </button>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/80">
+            <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase block">Products</span>
+              <span class="text-lg font-bold text-slate-900 dark:text-white">${stats.productCount} Formulations</span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase block">Total Sales</span>
+              <span class="text-lg font-bold text-emerald-600 dark:text-emerald-400">${formatINR(stats.totalSales)}</span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase block">Total Purchases</span>
+              <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">${formatINR(stats.totalPurchases)}</span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase block">Inventory Value</span>
+              <span class="text-lg font-bold text-sky-600 dark:text-sky-400">${formatINR(stats.inventoryVal)}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Sub-Tabs -->
+        <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+          <button data-subtab="overview" class="subtab-btn px-4 py-2.5 font-medium text-xs rounded-t-xl transition-all ${subTab === 'overview' ? 'bg-blue-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'}">Overview</button>
+          <button data-subtab="products" class="subtab-btn px-4 py-2.5 font-medium text-xs rounded-t-xl transition-all ${subTab === 'products' ? 'bg-blue-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'}">Products (${stats.productCount})</button>
+          <button data-subtab="sales" class="subtab-btn px-4 py-2.5 font-medium text-xs rounded-t-xl transition-all ${subTab === 'sales' ? 'bg-blue-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'}">Sales Billing</button>
+          <button data-subtab="purchases" class="subtab-btn px-4 py-2.5 font-medium text-xs rounded-t-xl transition-all ${subTab === 'purchases' ? 'bg-blue-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'}">Purchases</button>
+        </div>
+
+        <!-- Sub-Tab Dynamic Container -->
+        <div id="companySubTabContent">
+          <!-- Dynamic Content -->
+        </div>
+      `;
+    }
+
+    function attachCompanyDetailEvents(comp, currentSubTab) {
+      document.querySelectorAll('.subtab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tab = btn.getAttribute('data-subtab');
+          navigateTo('company-detail', { companyId: comp.id, subTab: tab });
+        });
+      });
+
+      const container = document.getElementById('companySubTabContent');
+      if (!container) return;
+
+      if (currentSubTab === 'overview') {
+        container.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+              <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-3">Company Details & Contact</h3>
+              <div class="space-y-2 text-xs">
+                <p><span class="text-slate-400 w-28 inline-block">Manufacturer:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.name}</strong></p>
+                <p><span class="text-slate-400 w-28 inline-block">Company Code:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.code}</strong></p>
+                <p><span class="text-slate-400 w-28 inline-block">Category:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.category}</strong></p>
+                <p><span class="text-slate-400 w-28 inline-block">Email:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.email}</strong></p>
+                <p><span class="text-slate-400 w-28 inline-block">Phone:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.phone}</strong></p>
+                <p><span class="text-slate-400 w-28 inline-block">Address:</span> <strong class="text-slate-800 dark:text-slate-200">${comp.address}</strong></p>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+              <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-3">Top Formulations</h3>
+              <div class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                ${appData.products.filter(p => p.companyId === comp.id).slice(0, 5).map(p => `
+                  <div class="py-2 flex items-center justify-between text-xs">
+                    <div>
+                      <p class="font-semibold text-slate-800 dark:text-slate-200">${p.name}</p>
+                      <p class="text-[10px] text-slate-400">${p.generic}</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-bold text-slate-800 dark:text-slate-200">${p.stock} units</p>
+                      <p class="text-[10px] text-emerald-600">MRP: ₹${p.mrp}</p>
+                    </div>
+                  </div>
+                `).join('') || '<p class="text-xs text-slate-400 py-3">No products available for this company</p>'}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (currentSubTab === 'products') {
+        container.innerHTML = `
+          <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 overflow-hidden shadow-sm">
+            ${renderProductTableHTML(appData.products.filter(p => p.companyId === comp.id))}
+          </div>
+        `;
+      } else if (currentSubTab === 'sales') {
+        container.innerHTML = `
+          <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 overflow-hidden shadow-sm">
+            ${renderSalesTableHTML(appData.sales.filter(s => s.companyId === comp.id))}
+          </div>
+        `;
+      } else if (currentSubTab === 'purchases') {
+        container.innerHTML = `
+          <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 overflow-hidden shadow-sm">
+            ${renderPurchasesTableHTML(appData.purchases.filter(p => p.companyId === comp.id))}
+          </div>
+        `;
+      }
+    }
+
+    // 4. PRODUCTS VIEW & TABLE RENDERERS
+    function buildProductsHTML(initialSearch = '') {
+      return `
+        <!-- Products Control Header -->
+        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div class="relative w-full sm:w-72">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+              <input type="text" id="productSearchInput" value="${initialSearch}" placeholder="Search formulation or generic name..." class="w-full bg-white dark:bg-slate-800 text-sm pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 outline-none focus:border-blue-500 transition-all">
+            </div>
+
+            <select id="productCompanyFilter" class="bg-white dark:bg-slate-800 text-sm px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 outline-none">
+              <option value="all">All Companies</option>
+              ${appData.companies.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}
+            </select>
+          </div>
+
+          ${userRole === 'Admin' ? `
+            <button id="addProductModalBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-plus"></i> Add New Product
+            </button>
+          ` : ''}
+        </div>
+
+        <!-- Products Table Card -->
+        <div id="productsTableContainer" class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+          <!-- Table dynamically injected -->
+        </div>
+      `;
+    }
+
+    function renderProductTableHTML(productList) {
+      if (productList.length === 0) {
+        return `
+          <div class="p-8 text-center text-slate-400">
+            <i class="fa-solid fa-pills text-3xl mb-2"></i>
+            <p class="font-medium text-sm">No formulations match your query.</p>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-200 dark:border-slate-700/80">
+              <tr>
+                <th class="py-3 px-4">Code / Product</th>
+                <th class="py-3 px-4">Company</th>
+                <th class="py-3 px-4">Pack Size</th>
+                <th class="py-3 px-4">MRP / Purchase / Selling</th>
+                <th class="py-3 px-4">Stock</th>
+                <th class="py-3 px-4">Batch / Expiry</th>
+                <th class="py-3 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+              ${productList.map(p => {
+                const comp = appData.companies.find(c => c.id === p.companyId);
+                const expStatus = getExpiryStatus(p.expiryDate);
+                const isLow = p.stock <= p.minStock;
+
+                return `
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                    <td class="py-3 px-4">
+                      <div class="font-bold text-slate-900 dark:text-white text-sm">${p.name}</div>
+                      <div class="text-[11px] text-slate-400 font-mono">Code: ${p.code} | Generic: ${p.generic}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                      <span class="font-medium text-slate-700 dark:text-slate-300">${comp ? comp.name : 'Unknown'}</span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-600 dark:text-slate-400">${p.pack}</td>
+                    <td class="py-3 px-4 font-mono">
+                      <div><span class="text-slate-400">MRP:</span> ₹${p.mrp}</div>
+                      <div class="text-blue-600 dark:text-blue-400 font-semibold"><span class="text-slate-400">Buy:</span> ₹${p.purchasePrice} | <span class="text-slate-400">Sell:</span> ₹${p.sellingPrice}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                      <div class="font-bold ${isLow ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-200'}">${p.stock} units</div>
+                      <span class="text-[10px] px-1.5 py-0.5 rounded ${isLow ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40' : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40'}">
+                        ${p.stock === 0 ? 'Out of Stock' : (isLow ? 'Low Stock' : 'In Stock')}
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 font-mono">
+                      <div class="text-slate-700 dark:text-slate-300">${p.batchNo || 'N/A'}</div>
+                      <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${expStatus.class}">${p.expiryDate || 'N/A'}</span>
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                      <div class="flex items-center justify-end gap-1">
+                        <button onclick="openProductDetailModal('${p.id}')" title="View Product Detail" class="p-1.5 text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-700 rounded-lg">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                        ${userRole === 'Admin' ? `
+                          <button onclick="openEditProductModal('${p.id}')" title="Edit Formulation" class="p-1.5 text-slate-400 hover:text-blue-600 rounded-lg">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                          </button>
+                          <button onclick="deleteProduct('${p.id}')" title="Delete Formulation" class="p-1.5 text-slate-400 hover:text-red-600 rounded-lg">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        ` : ''}
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function attachProductsEvents() {
+      const searchInput = document.getElementById('productSearchInput');
+      const compSelect = document.getElementById('productCompanyFilter');
+
+      function filterAndRender() {
+        let list = [...appData.products];
+        const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const cid = compSelect ? compSelect.value : 'all';
+
+        if (cid !== 'all') {
+          list = list.filter(p => p.companyId === cid);
+        }
+        if (q) {
+          list = list.filter(p => p.name.toLowerCase().includes(q) || p.generic.toLowerCase().includes(q) || p.code.toLowerCase().includes(q));
+        }
+
+        const container = document.getElementById('productsTableContainer');
+        if (container) container.innerHTML = renderProductTableHTML(list);
+      }
+
+      if (searchInput) searchInput.addEventListener('input', filterAndRender);
+      if (compSelect) compSelect.addEventListener('change', filterAndRender);
+
+      const addBtn = document.getElementById('addProductModalBtn');
+      if (addBtn) addBtn.addEventListener('click', () => openAddProductModal());
+
+      filterAndRender();
+    }
+
+    // 5. SALES MANAGEMENT
+    function buildSalesHTML() {
+      const totalSalesVal = appData.sales.reduce((s, x) => s + x.total, 0);
+
+      return `
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <span class="text-xs text-slate-400 uppercase font-semibold">Accumulated B2B Revenue</span>
+            <h3 class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">${formatINR(totalSalesVal)}</h3>
+          </div>
+
+          ${userRole !== 'MR' ? `
+            <button id="addSaleModalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-2">
+              <i class="fa-solid fa-plus"></i> Record Sale / New Billing
+            </button>
+          ` : ''}
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+          ${renderSalesTableHTML(appData.sales)}
+        </div>
+      `;
+    }
+
+    function renderSalesTableHTML(salesList) {
+      if (salesList.length === 0) {
+        return `<div class="p-8 text-center text-slate-400">No sales transactions found</div>`;
+      }
+
+      return `
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-200 dark:border-slate-700/80">
+              <tr>
+                <th class="py-3 px-4">Invoice / Date</th>
+                <th class="py-3 px-4">Customer / Pharmacy</th>
+                <th class="py-3 px-4">Formulation</th>
+                <th class="py-3 px-4">Qty</th>
+                <th class="py-3 px-4">Unit Rate</th>
+                <th class="py-3 px-4">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+              ${salesList.slice().reverse().map(s => {
+                const prod = appData.products.find(p => p.id === s.productId);
+                return `
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="py-3 px-4">
+                      <div class="font-mono font-bold text-slate-900 dark:text-white">${s.id}</div>
+                      <div class="text-[10px] text-slate-400">${s.date}</div>
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200">${s.customerName}</td>
+                    <td class="py-3 px-4">${prod ? prod.name : 'N/A'}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-slate-800 dark:text-slate-200">${s.qty}</td>
+                    <td class="py-3 px-4 font-mono text-slate-600 dark:text-slate-400">₹${s.price}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">${formatINR(s.total)}</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function attachSalesEvents() {
+      const btn = document.getElementById('addSaleModalBtn');
+      if (btn) btn.addEventListener('click', () => openAddSaleModal());
+    }
+
+    // 6. PURCHASES MANAGEMENT
+    function buildPurchasesHTML() {
+      const totalPurchVal = appData.purchases.reduce((s, x) => s + x.total, 0);
+
+      return `
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <span class="text-xs text-slate-400 uppercase font-semibold">Total Stock Acquisitions</span>
+            <h3 class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">${formatINR(totalPurchVal)}</h3>
+          </div>
+
+          ${userRole === 'Admin' ? `
+            <button id="addPurchaseModalBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-md shadow-indigo-600/20 flex items-center gap-2">
+              <i class="fa-solid fa-cart-flatbed-suitcases"></i> Add Stock Purchase
+            </button>
+          ` : ''}
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+          ${renderPurchasesTableHTML(appData.purchases)}
+        </div>
+      `;
+    }
+
+    function renderPurchasesTableHTML(purchList) {
+      if (purchList.length === 0) {
+        return `<div class="p-8 text-center text-slate-400">No purchase acquisitions recorded</div>`;
+      }
+
+      return `
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-200 dark:border-slate-700/80">
+              <tr>
+                <th class="py-3 px-4">Invoice / Date</th>
+                <th class="py-3 px-4">Supplier / C&F Depot</th>
+                <th class="py-3 px-4">Formulation</th>
+                <th class="py-3 px-4">Qty Added</th>
+                <th class="py-3 px-4">Purchase Price</th>
+                <th class="py-3 px-4">Total Cost</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+              ${purchList.slice().reverse().map(p => {
+                const prod = appData.products.find(x => x.id === p.productId);
+                return `
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="py-3 px-4">
+                      <div class="font-mono font-bold text-slate-900 dark:text-white">${p.id}</div>
+                      <div class="text-[10px] text-slate-400">${p.date}</div>
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200">${p.supplierName}</td>
+                    <td class="py-3 px-4">${prod ? prod.name : 'N/A'}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-slate-800 dark:text-slate-200">+${p.qty}</td>
+                    <td class="py-3 px-4 font-mono text-slate-600 dark:text-slate-400">₹${p.price}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-indigo-600 dark:text-indigo-400">${formatINR(p.total)}</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function attachPurchasesEvents() {
+      const btn = document.getElementById('addPurchaseModalBtn');
+      if (btn) btn.addEventListener('click', () => openAddPurchaseModal());
+    }
+
+    // 7. INVENTORY CONTROL & BATCH EXPIRY
+    function buildInventoryHTML() {
+      const totalItems = appData.products.length;
+      const totalVal = appData.products.reduce((s, p) => s + (p.stock * p.purchasePrice), 0);
+      const lowStock = appData.products.filter(p => p.stock <= p.minStock && p.stock > 0);
+      const outOfStock = appData.products.filter(p => p.stock === 0);
+
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <span class="text-xs text-slate-400 uppercase font-semibold">Total Stock Value</span>
+            <div class="text-xl font-bold text-slate-900 dark:text-white mt-1">${formatINR(totalVal)}</div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <span class="text-xs text-slate-400 uppercase font-semibold">In Stock Formulations</span>
+            <div class="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">${totalItems - outOfStock.length} Items</div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <span class="text-xs text-slate-400 uppercase font-semibold">Low Stock Threshold</span>
+            <div class="text-xl font-bold text-amber-600 dark:text-amber-400 mt-1">${lowStock.length} Items</div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <span class="text-xs text-slate-400 uppercase font-semibold">Out Of Stock</span>
+            <div class="text-xl font-bold text-red-600 dark:text-red-400 mt-1">${outOfStock.length} Items</div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-slate-100 dark:border-slate-700/80 flex justify-between items-center">
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Full Batch & Inventory Valuation Status</h3>
+            <span class="text-xs text-slate-400">Automatic Stock Sync Active</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase font-medium border-b border-slate-200 dark:border-slate-700/80">
+                <tr>
+                  <th class="py-3 px-4">Formulation</th>
+                  <th class="py-3 px-4">Company</th>
+                  <th class="py-3 px-4">Batch No.</th>
+                  <th class="py-3 px-4">Current Stock</th>
+                  <th class="py-3 px-4">Unit Buy Price</th>
+                  <th class="py-3 px-4">Holding Valuation</th>
+                  <th class="py-3 px-4">Expiry Condition</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                ${appData.products.map(p => {
+                  const comp = appData.companies.find(c => c.id === p.companyId);
+                  const expStatus = getExpiryStatus(p.expiryDate);
+
+                  return `
+                    <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                      <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${p.name}</td>
+                      <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${comp ? comp.name : 'N/A'}</td>
+                      <td class="py-3 px-4 font-mono">${p.batchNo || 'N/A'}</td>
+                      <td class="py-3 px-4 font-mono font-bold ${p.stock <= p.minStock ? 'text-amber-600' : 'text-slate-800 dark:text-slate-200'}">
+                        ${p.stock} units
+                      </td>
+                      <td class="py-3 px-4 font-mono">₹${p.purchasePrice}</td>
+                      <td class="py-3 px-4 font-mono font-bold text-sky-600 dark:text-sky-400">${formatINR(p.stock * p.purchasePrice)}</td>
+                      <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded-full font-bold text-[10px] ${expStatus.class}">
+                          ${expStatus.label} (${p.expiryDate})
+                        </span>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
             </table>
-        </section>
+          </div>
+        </div>
+      `;
+    }
 
-        <!-- Aside Section -->
-        <aside>
-            <article>
-                <h3>Organic Health Tip</h3>
-                <p>Switching to organic produce helps reduce your daily chemical pesticide intake and supports eco-friendly farming practices.</p>
-            </article>
-        </aside>
+    function attachInventoryEvents() {
+      // Inventory static handlers
+    }
 
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Fill in your details below to send an inquiry:</p>
+    // 8. ANALYTICS & REPORTS
+    function buildReportsHTML() {
+      return `
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">Agency Performance Reports</h3>
+            <p class="text-xs text-slate-500">Commercial audits and company performance metrics</p>
+          </div>
+          <button onclick="window.print()" class="no-print bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs px-4 py-2.5 rounded-xl shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-print"></i> Print / Export Report
+          </button>
+        </div>
 
-            <form action="#" method="post">
-                <p>
-                    <label for="fullname"><strong>Full Name:</strong></label><br>
-                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-                </p>
-                <p>
-                    <label for="email"><strong>Email Address:</strong></label><br>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </p>
-                <p>
-                    <label for="category"><strong>Inquiry Type:</strong></label><br>
-                    <select id="category" name="category">
-                        <option value="general">General Inquiry</option>
-                        <option value="product">Product Order</option>
-                        <option value="bulk">Bulk Order</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="message"><strong>Your Message:</strong></label><br>
-                    <textarea id="message" name="message" rows="4" placeholder="Write your message here..."></textarea>
-                </p>
-                <p>
-                    <input type="submit" value="Submit Form">
-                </p>
-            </form>
-        </section>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 print-area">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-4">Company-wise Sales Revenue Comparison</h4>
+            <div class="h-64">
+              <canvas id="companySalesBarChart"></canvas>
+            </div>
+          </div>
 
-    </main>
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm">
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-4">Gross Margin Analysis</h4>
+            <div class="h-64">
+              <canvas id="marginChart"></canvas>
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
-    <!-- Footer Section -->
-    <footer>
-        <p><strong>GreenLeaf Organics Pvt. Ltd.</strong></p>
-        <p><strong>Made By JWAL PATEL!!.</strong></p>
-        <p>Address: Sector 10, Organic Park, Anand, Gujarat - 388001</p>
-        <p>Email: info@greenleaforganics.com | Phone: +91 000000000</p>
-        <p>&copy; 2026 GreenLeaf Organics Pvt. Ltd. All Rights Reserved.</p>
-    </footer>
+    function initReportsCharts() {
+      const ctx1 = document.getElementById('companySalesBarChart');
+      if (ctx1) {
+        activeCharts.reportsBar = new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: appData.companies.map(c => c.name),
+            datasets: [{
+              label: 'Sales Revenue (₹)',
+              data: appData.companies.map(c => getCompanyStats(c.id).totalSales),
+              backgroundColor: '#0284c7',
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
 
+      const ctx2 = document.getElementById('marginChart');
+      if (ctx2) {
+        const totalSales = appData.sales.reduce((s, x) => s + x.total, 0);
+        const totalPurch = appData.purchases.reduce((s, x) => s + x.total, 0);
+
+        activeCharts.reportsMargin = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: ['Total Purchases Cost', 'Total Sales Revenue', 'Gross Profit Delta'],
+            datasets: [{
+              data: [totalPurch, totalSales, Math.max(0, totalSales - totalPurch)],
+              backgroundColor: ['#6366f1', '#10b981', '#f59e0b'],
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+    }
+
+    // MODALS & FORMS HANDLERS
+    function openModal(title, bodyHTML) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalBody').innerHTML = bodyHTML;
+      document.getElementById('modalBackdrop').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.add('hidden');
+    }
+
+    // 1. ADD / EDIT PHARMA COMPANY MODAL
+    function openAddCompanyModal() {
+      const html = `
+        <form id="addCompanyForm" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Company Name *</label>
+            <input type="text" id="cName" required placeholder="e.g. Cipla Pharma Ltd." class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Company Code *</label>
+              <input type="text" id="cCode" required placeholder="CIPLA" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Category</label>
+              <input type="text" id="cCat" placeholder="Allopathy / Ayurvedic" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Phone</label>
+              <input type="text" id="cPhone" placeholder="+91 98000 00000" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Email</label>
+              <input type="email" id="cEmail" placeholder="orders@company.com" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Office / Plant Address</label>
+            <input type="text" id="cAddr" placeholder="Industrial Hub, City" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none focus:border-blue-500">
+          </div>
+          <div class="pt-3 flex justify-end gap-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">Cancel</button>
+            <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700">Save Company</button>
+          </div>
+        </form>
+      `;
+      openModal("Add Pharmaceutical Manufacturer", html);
+
+      document.getElementById('addCompanyForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newComp = {
+          id: 'COMP-' + String(Date.now()).slice(-4),
+          name: document.getElementById('cName').value,
+          code: document.getElementById('cCode').value.toUpperCase(),
+          category: document.getElementById('cCat').value || 'General',
+          phone: document.getElementById('cPhone').value,
+          email: document.getElementById('cEmail').value,
+          address: document.getElementById('cAddr').value,
+          desc: 'Registered Pharmaceutical Manufacturer',
+          logoBg: 'bg-blue-600'
+        };
+
+        appData.companies.push(newComp);
+        saveAppData();
+        closeModal();
+        showToast(`Company ${newComp.name} added!`, 'success');
+        renderCurrentView();
+      });
+    }
+
+    // 2. ADD / EDIT PRODUCT FORMULATION MODAL
+    function openAddProductModal(defaultCompId = '') {
+      if (appData.companies.length === 0) {
+        showToast("Please add at least one company first!", "warning");
+        return;
+      }
+
+      const html = `
+        <form id="addProductForm" class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Company *</label>
+              <select id="pComp" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+                ${appData.companies.map(c => `<option value="${c.id}" ${c.id === defaultCompId ? 'selected' : ''}>${c.name}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Product Brand Name *</label>
+              <input type="text" id="pName" required placeholder="e.g. Paracetamol 650" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Product Code</label>
+              <input type="text" id="pCode" placeholder="PCM-650" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Generic Name</label>
+              <input type="text" id="pGeneric" placeholder="Paracetamol IP 650mg" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Pack Size</label>
+              <input type="text" id="pPack" placeholder="10 x 10 Tablets" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">MRP (₹)</label>
+              <input type="number" step="0.01" id="pMrp" required placeholder="100" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Purchase Rate (₹)</label>
+              <input type="number" step="0.01" id="pBuy" required placeholder="60" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Selling Rate (₹)</label>
+              <input type="number" step="0.01" id="pSell" required placeholder="80" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-4 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Initial Stock</label>
+              <input type="number" id="pStock" required value="100" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Min Stock Alert</label>
+              <input type="number" id="pMin" required value="20" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Batch No.</label>
+              <input type="text" id="pBatch" placeholder="B24-100" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Expiry Date</label>
+              <input type="date" id="pExp" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">Cancel</button>
+            <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700">Save Product</button>
+          </div>
+        </form>
+      `;
+      openModal("Add Product Formulation", html);
+
+      document.getElementById('addProductForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newProd = {
+          id: 'PROD-' + String(Date.now()).slice(-4),
+          companyId: document.getElementById('pComp').value,
+          name: document.getElementById('pName').value,
+          code: document.getElementById('pCode').value || 'MED-000',
+          generic: document.getElementById('pGeneric').value || 'Generic Formulation',
+          category: 'General',
+          pack: document.getElementById('pPack').value || 'Standard Pack',
+          mrp: parseFloat(document.getElementById('pMrp').value),
+          purchasePrice: parseFloat(document.getElementById('pBuy').value),
+          sellingPrice: parseFloat(document.getElementById('pSell').value),
+          stock: parseInt(document.getElementById('pStock').value),
+          minStock: parseInt(document.getElementById('pMin').value),
+          batchNo: document.getElementById('pBatch').value || 'B24-00',
+          expiryDate: document.getElementById('pExp').value || '2027-12-31'
+        };
+
+        appData.products.push(newProd);
+        saveAppData();
+        closeModal();
+        showToast(`Product ${newProd.name} created!`, 'success');
+        updateNotifications();
+        renderCurrentView();
+      });
+    }
+
+    // 3. RECORD SALE MODAL
+    function openAddSaleModal(defaultCompId = '') {
+      if (appData.products.length === 0) {
+        showToast("No products available to sell", "warning");
+        return;
+      }
+
+      const html = `
+        <form id="addSaleForm" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Select Formulation *</label>
+            <select id="sProduct" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+              ${appData.products.map(p => `<option value="${p.id}">${p.name} (Available: ${p.stock} units | ₹${p.sellingPrice})</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Customer / Pharmacy Name *</label>
+              <input type="text" id="sCustomer" required placeholder="e.g. Sunrise Chemist" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Quantity *</label>
+              <input type="number" id="sQty" min="1" required value="10" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">Cancel</button>
+            <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700">Generate Sale Invoice</button>
+          </div>
+        </form>
+      `;
+      openModal("Record New Sale Billing", html);
+
+      document.getElementById('addSaleForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pId = document.getElementById('sProduct').value;
+        const prod = appData.products.find(p => p.id === pId);
+        const qty = parseInt(document.getElementById('sQty').value);
+
+        if (!prod || prod.stock < qty) {
+          showToast(`Insufficient stock! Available: ${prod ? prod.stock : 0}`, 'error');
+          return;
+        }
+
+        // Deduct inventory
+        prod.stock -= qty;
+
+        const sale = {
+          id: 'INV-S-' + String(Date.now()).slice(-4),
+          date: new Date().toISOString().split('T')[0],
+          companyId: prod.companyId,
+          productId: prod.id,
+          customerName: document.getElementById('sCustomer').value,
+          qty: qty,
+          price: prod.sellingPrice,
+          total: qty * prod.sellingPrice
+        };
+
+        appData.sales.push(sale);
+        saveAppData();
+        closeModal();
+        showToast(`Sale Invoice ${sale.id} issued successfully!`, 'success');
+        updateNotifications();
+        renderCurrentView();
+      });
+    }
+
+    // 4. ADD STOCK PURCHASE MODAL
+    function openAddPurchaseModal() {
+      const html = `
+        <form id="addPurchaseForm" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Select Formulation *</label>
+            <select id="purProduct" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+              ${appData.products.map(p => `<option value="${p.id}">${p.name} (Current Stock: ${p.stock})</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Supplier / C&F Depot *</label>
+              <input type="text" id="purSupplier" required placeholder="Depot Name" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Purchased Quantity *</label>
+              <input type="number" id="purQty" min="1" required value="100" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs outline-none">
+            </div>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">Cancel</button>
+            <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white hover:bg-indigo-700">Record Acquisition</button>
+          </div>
+        </form>
+      `;
+      openModal("Record Stock Purchase", html);
+
+      document.getElementById('addPurchaseForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pId = document.getElementById('purProduct').value;
+        const prod = appData.products.find(p => p.id === pId);
+        const qty = parseInt(document.getElementById('purQty').value);
+
+        // Increase inventory
+        prod.stock += qty;
+
+        const purch = {
+          id: 'INV-P-' + String(Date.now()).slice(-4),
+          date: new Date().toISOString().split('T')[0],
+          companyId: prod.companyId,
+          productId: prod.id,
+          supplierName: document.getElementById('purSupplier').value,
+          qty: qty,
+          price: prod.purchasePrice,
+          total: qty * prod.purchasePrice
+        };
+
+        appData.purchases.push(purch);
+        saveAppData();
+        closeModal();
+        showToast(`Stock updated! Added ${qty} units of ${prod.name}`, 'success');
+        updateNotifications();
+        renderCurrentView();
+      });
+    }
+
+    // PRODUCT DETAIL MODAL VIEW
+    function openProductDetailModal(prodId) {
+      const p = appData.products.find(x => x.id === prodId);
+      if (!p) return;
+      const comp = appData.companies.find(c => c.id === p.companyId);
+
+      const html = `
+        <div class="space-y-4 text-xs">
+          <div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-base text-blue-900 dark:text-blue-200">${p.name}</h4>
+              <p class="text-slate-500">${p.generic}</p>
+            </div>
+            <span class="px-2.5 py-1 bg-blue-600 text-white font-bold rounded-lg text-xs">${p.code}</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <p><strong class="text-slate-400">Manufacturer:</strong> ${comp ? comp.name : 'N/A'}</p>
+            <p><strong class="text-slate-400">Pack Size:</strong> ${p.pack}</p>
+            <p><strong class="text-slate-400">MRP:</strong> ₹${p.mrp}</p>
+            <p><strong class="text-slate-400">Buy / Sell Rate:</strong> ₹${p.purchasePrice} / ₹${p.sellingPrice}</p>
+            <p><strong class="text-slate-400">Batch Number:</strong> ${p.batchNo || 'N/A'}</p>
+            <p><strong class="text-slate-400">Expiry Date:</strong> ${p.expiryDate || 'N/A'}</p>
+            <p><strong class="text-slate-400">Current Stock:</strong> <span class="font-bold text-blue-600">${p.stock} units</span></p>
+            <p><strong class="text-slate-400">Min Reorder Level:</strong> ${p.minStock} units</p>
+          </div>
+        </div>
+      `;
+      openModal("Formulation Details", html);
+    }
+
+    function deleteProduct(prodId) {
+      if (confirm("Are you sure you want to delete this product?")) {
+        appData.products = appData.products.filter(p => p.id !== prodId);
+        saveAppData();
+        showToast("Product deleted!", "info");
+        renderCurrentView();
+      }
+    }
+
+    // NOTIFICATIONS SYSTEM
+    function updateNotifications() {
+      const list = document.getElementById('notifList');
+      const badge = document.getElementById('notifBadge');
+      const countText = document.getElementById('notifCountText');
+
+      let alerts = [];
+
+      // Check stock
+      appData.products.forEach(p => {
+        if (p.stock === 0) {
+          alerts.push({ type: 'danger', msg: `<strong>${p.name}</strong> is completely OUT OF STOCK!` });
+        } else if (p.stock <= p.minStock) {
+          alerts.push({ type: 'warning', msg: `<strong>${p.name}</strong> is low on stock (${p.stock} remaining)` });
+        }
+
+        const exp = getExpiryStatus(p.expiryDate);
+        if (exp.label === 'Expiring Soon') {
+          alerts.push({ type: 'warning', msg: `<strong>${p.name}</strong> expires soon on ${p.expiryDate}` });
+        }
+      });
+
+      if (alerts.length > 0) {
+        badge.innerText = alerts.length;
+        badge.classList.remove('hidden');
+        countText.innerText = `${alerts.length} Alerts`;
+      } else {
+        badge.classList.add('hidden');
+        countText.innerText = `0 Alerts`;
+      }
+
+      if (alerts.length === 0) {
+        list.innerHTML = `<div class="p-4 text-center text-xs text-slate-400">No active alerts. All agency operations normal.</div>`;
+      } else {
+        list.innerHTML = alerts.map(a => `
+          <div class="p-3 text-xs flex items-start gap-2.5">
+            <i class="fa-solid fa-circle-exclamation text-sm mt-0.5 ${a.type === 'danger' ? 'text-red-500' : 'text-amber-500'}"></i>
+            <div class="text-slate-700 dark:text-slate-300 leading-tight">${a.msg}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // TOAST NOTIFICATIONS
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+
+      const colors = {
+        success: 'bg-emerald-600 text-white',
+        error: 'bg-red-600 text-white',
+        warning: 'bg-amber-500 text-white',
+        info: 'bg-slate-900 text-white'
+      };
+
+      toast.className = `px-4 py-2.5 rounded-xl text-xs font-semibold shadow-xl toast-animate pointer-events-auto flex items-center gap-2 ${colors[type] || colors.info}`;
+      toast.innerHTML = `<span>${message}</span>`;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+
+    // THEME CONTROLLER
+    function checkTheme() {
+      const savedTheme = localStorage.getItem('MEDITRADE_THEME');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('MEDITRADE_THEME', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('MEDITRADE_THEME', 'dark');
+      }
+    }
+
+    // MOBILE SIDEBAR CONTROLLERS
+    function openMobileSidebar() {
+      document.getElementById('sidebar').classList.remove('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.remove('hidden');
+    }
+
+    function closeMobileSidebar() {
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.add('hidden');
+    }
+
+    // DESTROY CHARTS UTILITY
+    function destroyCharts() {
+      Object.keys(activeCharts).forEach(key => {
+        if (activeCharts[key]) {
+          activeCharts[key].destroy();
+        }
+      });
+      activeCharts = {};
+    }
+  </script>
 </body>
 </html>
